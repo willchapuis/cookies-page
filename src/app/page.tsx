@@ -1,65 +1,125 @@
-import Image from "next/image";
+function PrimaryButton({ children }: { children: React.ReactNode }) {
+  return (
+    <button className="rounded-full bg-domass-primary px-6 py-3 font-semibold text-white shadow-sm hover:opacity-90 transition">
+      {children}
+    </button>
+  );
+}
+
+function SecondaryButton({ children }: { children: React.ReactNode }) {
+  return (
+    <button className="rounded-full border-2 border-domass-primary bg-transparent px-6 py-3 font-semibold text-domass-primary hover:bg-domass-primary hover:text-white transition">
+      {children}
+    </button>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="mx-auto max-w-5xl px-5 py-10">
+      {/* Header simples (depois vira componente) */}
+      <header className="mb-10 flex items-center justify-between">
+        <div className="text-xl font-semibold">Domass Cookies</div>
+        <nav className="hidden gap-6 md:flex">
+          <a className="hover:underline" href="#galeria">Galeria</a>
+          <a className="hover:underline" href="#como-funciona">Como funciona</a>
+          <a className="hover:underline" href="#sobre">Sobre</a>
+          <a className="hover:underline" href="#encomenda">Encomenda</a>
+        </nav>
+        <div className="hidden md:block">
+          <PrimaryButton>Fazer encomenda</PrimaryButton>
+        </div>
+      </header>
+
+      {/* HERO */}
+      <section className="grid gap-8 md:grid-cols-2 items-center">
+        <div>
+          <h1 className="text-4xl leading-tight md:text-5xl">
+            Biscoitos artesanais personalizados para momentos especiais
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-4 text-base md:text-lg">
+            Feitos à mão, com carinho em cada detalhe — do tema ao acabamento.
           </p>
+
+          <div className="mt-6 flex gap-3">
+            <PrimaryButton>Fazer encomenda</PrimaryButton>
+            <SecondaryButton>Ver galeria</SecondaryButton>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Placeholder da imagem do hero */}
+        <div className="rounded-3xl bg-domass-cookie p-6 shadow-sm">
+          <div className="aspect-[4/3] w-full rounded-2xl bg-domass-bg/60 grid place-items-center">
+            <span className="text-sm">Foto destaque (hero)</span>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* GALERIA */}
+      <section id="galeria" className="mt-14 rounded-3xl bg-domass-cookie p-6 shadow-sm">
+        <h2 className="text-2xl font-semibold">Inspirações</h2>
+        <p className="mt-1">Alguns temas que já criamos (e podemos criar o seu também).</p>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={i}
+              className="rounded-2xl bg-domass-bg/60 p-4 shadow-sm"
+            >
+              <div className="aspect-square rounded-xl bg-domass-bg/60 grid place-items-center">
+                <span className="text-sm">Foto {i + 1}</span>
+              </div>
+              <div className="mt-3 font-medium">Tema exemplo</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* COMO FUNCIONA */}
+      <section id="como-funciona" className="mt-14">
+        <h2 className="text-2xl font-semibold">Como funciona</h2>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {[
+            { title: "Conte sua ideia", desc: "Tema, quantidade, tamanhos e detalhes do seu pedido." },
+            { title: "Produção artesanal", desc: "Cuidamos de cada etapa para ficar do jeitinho que você imaginou." },
+            { title: "Entrega do seu momento", desc: "Tudo pronto para tornar a ocasião ainda mais especial." },
+          ].map((item) => (
+            <div key={item.title} className="rounded-3xl bg-domass-bg/60 p-6 shadow-sm">
+              <div className="text-lg font-semibold">{item.title}</div>
+              <p className="mt-2">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SOBRE */}
+      <section id="sobre" className="mt-14 rounded-3xl bg-domass-cookie p-6 shadow-sm">
+        <h2 className="text-2xl font-semibold">Sobre a Domass Cookies</h2>
+        <p className="mt-3">
+          A Domass Cookies nasceu do amor pelos detalhes e pela alegria de fazer parte de momentos especiais.
+          Aqui, cada biscoito é feito à mão — com cuidado, carinho e personalização.
+        </p>
+      </section>
+
+      {/* CTA FINAL */}
+      <section className="mt-14 rounded-3xl bg-domass-primary p-8 text-white shadow-sm">
+        <h2 className="text-3xl font-semibold">Vamos criar algo especial juntos?</h2>
+        <p className="mt-2 opacity-95">
+          Envie sua ideia e retornamos com o orçamento e o prazo.
+        </p>
+        <div className="mt-6">
+          <button className="rounded-full bg-domass-bg px-6 py-3 font-semibold text-domass-primary hover:opacity-90 transition">
+            Fazer encomenda
+          </button>
+        </div>
+      </section>
+
+      {/* Âncora do formulário (vamos construir em seguida) */}
+      <section id="encomenda" className="mt-14 pb-10">
+        <h2 className="text-2xl font-semibold">Encomenda</h2>
+        <p className="mt-2">Formulário entra aqui no próximo passo.</p>
+      </section>
+    </main>
   );
 }
