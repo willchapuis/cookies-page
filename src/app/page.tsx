@@ -1,3 +1,5 @@
+import OrderForm from "@/components/OrderForm";
+
 function PrimaryButton({ children }: { children: React.ReactNode }) {
   return (
     <button className="rounded-full bg-domass-primary px-6 py-3 font-semibold text-white shadow-sm hover:opacity-90 transition">
@@ -118,7 +120,8 @@ export default function Home() {
       {/* Âncora do formulário (vamos construir em seguida) */}
       <section id="encomenda" className="mt-14 pb-10">
         <h2 className="text-2xl font-semibold">Encomenda</h2>
-        <p className="mt-2">Formulário entra aqui no próximo passo.</p>
+        <p className="mt-2">Conte sua ideia e vamos criar algo especial juntos!</p>
+        {<OrderForm />}
       </section>
     </main>
   );
