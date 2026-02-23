@@ -1,4 +1,5 @@
 import OrderForm from "@/components/OrderForm";
+import Image from "next/image";
 
 function PrimaryButton({ children }: { children: React.ReactNode }) {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
     <main className="mx-auto max-w-5xl px-5 py-10">
       {/* Header simples (depois vira componente) */}
       <header className="mb-10 flex items-center justify-between">
+        <link rel="icon" type="image/svg+xml" href="/icons/fav-icon.svg" />
         <div className="text-xl font-semibold">Domass Cookies</div>
         <nav className="hidden gap-6 md:flex">
           <a className="hover:underline" href="#galeria">Galeria</a>

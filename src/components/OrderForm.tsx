@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { PRAZO_MINIMO_DIAS_UTEIS } from "@/lib/config";
 import { addBusinessDays, formatDateInput, formatDateBR, formatDateBRFromInput } from "@/lib/businessDays";
+import { formatPhoneBR, isValidPhoneBR, onlyDigits } from "@/lib/phone";
 
 type Status =
   | { kind: "idle" }
@@ -44,6 +45,10 @@ export default function OrderForm() {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!isValidPhoneBR(telefone)) {
+        setStatus({ kind: "error", message: "Informe um número com DDD (ex: 11912345678)." });
+        return;
+    }
     setStatus({ kind: "loading" });
 
     try {
@@ -80,8 +85,8 @@ export default function OrderForm() {
       }
 
       // opcional: limpar campos
-      // setNome(""); setTelefone(""); setDescricao(""); setPrefiroWhatsapp(false);
-      // setOpcaoData("padrao"); setDataEscolhida(minDateStr);
+      setNome(""); setTelefone(""); setDescricao(""); setPrefiroWhatsapp(false);
+      setOpcaoData("padrao"); setDataEscolhida(minDateStr);
 
     } catch {
       setStatus({ kind: "error", message: "Falha de rede ao enviar o pedido." });
@@ -107,8 +112,10 @@ export default function OrderForm() {
           <input
             className="rounded-2xl bg-domass-bg px-4 py-3 outline-none ring-1 ring-domass-cocoa/15 focus:ring-domass-primary/40"
             value={telefone}
-            onChange={(e) => setTelefone(e.target.value)}
+            onChange={(e) => setTelefone(formatPhoneBR(e.target.value))}
             placeholder="(DDD) 99999-9999"
+            inputMode="tel"
+            autoComplete="tel"
             required
           />
         </label>

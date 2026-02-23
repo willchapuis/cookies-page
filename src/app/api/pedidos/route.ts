@@ -3,6 +3,7 @@ import { PRAZO_MINIMO_DIAS_UTEIS } from "@/lib/config";
 import { addBusinessDays } from "@/lib/businessDays";
 import fs from "fs/promises";
 import path from "path";
+import { isValidPhoneBR, onlyDigits } from "@/lib/phone";
 
 export const runtime = "nodejs";
 
@@ -29,12 +30,18 @@ export async function POST(req: Request) {
   }
 
   const nome = (body.nome || "").trim();
-  const telefone = (body.telefone || "").trim();
+  const telefone = onlyDigits((body.telefone || "").trim());
   const descricao = (body.descricao || "").trim();
   const opcaoData = body.opcaoData;
 
   if (!nome) return NextResponse.json({ error: "Nome é obrigatório." }, { status: 400 });
   if (!telefone) return NextResponse.json({ error: "Telefone é obrigatório." }, { status: 400 });
+  if (!isValidPhoneBR(telefone)) {
+    return NextResponse.json(
+        { error: "Telefone inválido. Informe um número com DDD (ex: 11912345678)." },
+        { status: 400 }
+    );
+}
   if (!descricao) return NextResponse.json({ error: "Descrição é obrigatória." }, { status: 400 });
   if (opcaoData !== "padrao" && opcaoData !== "escolher") {
     return NextResponse.json({ error: "Opção de data inválida." }, { status: 400 });
