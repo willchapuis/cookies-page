@@ -3,7 +3,14 @@ name: Deploy to GitHub Pages (static export)
 on:
   push:
     branches:
-      - develop
+      - main
+    paths-ignore:
+      - "CHANGELOG.md"
+      - "package.json"
+      - "package-lock.json"
+      - ".release-please-manifest.json"
+      - "release-please-config.json"
+  workflow_dispatch:
 
 permissions:
   contents: write
