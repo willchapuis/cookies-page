@@ -1,0 +1,1 @@
+export const PRAZO_MINIMO_DIAS_UTEIS = 10;
