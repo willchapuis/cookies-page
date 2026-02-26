@@ -57,7 +57,7 @@ export default function OrderForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nome,
-          telefone,
+          telefone: onlyDigits(telefone),
           descricao,
           opcaoData,
           dataEscolhida: opcaoData === "escolher" ? dataEscolhida : undefined,
